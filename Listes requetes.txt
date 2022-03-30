@@ -30,6 +30,16 @@ ON Adherents.Num_adh = Cotisations.Num_adh
 WHERE Cotisations.DateCotis>#31/12/2020# AND Ville_adh IS NULL
 GROUP BY Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.Ville_adh;
 
+SELECT COUNT(*), Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.Statut_adh
+FROM (Adherents INNER JOIN Cotisations ON Adherents.Num_adh = Cotisations.Num_adh)
+WHERE Cotisations.DateCotis>#31/12/2020# AND Adherents.Statut_adh = 0
+GROUP BY Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.Statut_adh;
+
+SELECT COUNT(*), Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.NiveauF_adh
+FROM (Adherents INNER JOIN Cotisations ON Adherents.Num_adh = Cotisations.Num_adh)
+WHERE Cotisations.DateCotis>#31/12/2020# AND Adherents.NiveauF_adh = 0
+GROUP BY Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.NiveauF_adh;
+
 ### TODO : Ville, Statut, NiveauF
 
 A voir aussi un GROUPBY Nom_adh (au cas ou il y ait plusieurs Num_adh pour une seule personne)
