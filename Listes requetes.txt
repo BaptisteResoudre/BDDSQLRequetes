@@ -1,24 +1,20 @@
 SELECT Adherents.Sexe_adh, Adherents.Nom_adh, Adherents.Prenom_adh
 FROM Adherents
-WHERE Sexe_adh IS NULL;
+INNER JOIN Cotisations
+ON Adherents.Num_adh = Cotisations.Num_adh
+WHERE Cotisations.DateCotis>#31/12/2020# AND Sexe_adh IS NULL;
 
-SELECT Adherents.Sexe_adh, Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.AnneeNaissance, Passages.Date_Pass
+SELECT Adherents.Sexe_adh, Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.AnneeNaissance
 FROM Adherents
-INNER JOIN Passages
-ON Adherents.Num_adh = Passages.Num_adh
-WHERE AnneeNaissance NOT LIKE '[0-9][0-9][0-9][0-9]' and Passages.Date_Pass>#31/12/2020#;
+INNER JOIN Cotisations
+ON Adherents.Num_adh = Cotisations.Num_adh
+WHERE Cotisations.DateCotis>#31/12/2020# AND AnneeNaissance NOT LIKE '[0-9][0-9][0-9][0-9]';
 
 SELECT Adherents.Sexe_adh, Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh
 FROM Adherents
-INNER JOIN Passages
-ON Adherents.Num_adh = Passages.Num_adh
-WHERE Passages.Date_Pass>#31/12/2020# AND Nationalite_adh IS NULL;
-
-SELECT Adherents.Sexe_adh, Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.CP_adh
-FROM Adherents
-INNER JOIN Passages
-ON Adherents.Num_adh = Passages.Num_adh
-WHERE Passages.Date_Pass>#31/12/2020# AND CP_adh NOT LIKE '[0-9][0-9][0-9][0-9][0-9]';
+INNER JOIN Cotisations
+ON Adherents.Num_adh = Cotisations.Num_adh
+WHERE Cotisations.DateCotis>#31/12/2020# AND Nationalite_adh IS NULL;
 
 SELECT COUNT(*), Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.CP_adh
 FROM Adherents
@@ -26,6 +22,13 @@ INNER JOIN Cotisations
 ON Adherents.Num_adh = Cotisations.Num_adh
 WHERE Cotisations.DateCotis>#31/12/2020# AND CP_adh NOT LIKE '[0-9][0-9][0-9][0-9][0-9]'
 GROUP BY Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.CP_adh;
+
+SELECT COUNT(*), Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.Ville_adh
+FROM Adherents
+INNER JOIN Cotisations
+ON Adherents.Num_adh = Cotisations.Num_adh
+WHERE Cotisations.DateCotis>#31/12/2020# AND Ville_adh IS NULL
+GROUP BY Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.Ville_adh;
 
 ### TODO : Ville, Statut, NiveauF
 
