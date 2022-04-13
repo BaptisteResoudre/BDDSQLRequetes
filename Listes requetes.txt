@@ -23,6 +23,13 @@ ON Adherents.Num_adh = Cotisations.Num_adh
 WHERE Cotisations.DateCotis>#31/12/2020# AND CP_adh NOT LIKE '[0-9][0-9][0-9][0-9][0-9]'
 GROUP BY Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.CP_adh;
 
+SELECT COUNT(*), Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.Adresse_adh
+FROM Adherents
+INNER JOIN Cotisations
+ON Adherents.Num_adh = Cotisations.Num_adh
+WHERE Cotisations.DateCotis>#31/12/2020# AND Adresse_adh NOT LIKE '[a-zA-Z0-9 ]'
+GROUP BY Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.Adresse_adh;
+
 SELECT COUNT(*), Adherents.Nom_adh, Adherents.Prenom_adh, Adherents.Nationalite_adh, Adherents.Ville_adh
 FROM Adherents
 INNER JOIN Cotisations
